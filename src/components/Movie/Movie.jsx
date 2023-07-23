@@ -1,6 +1,8 @@
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import StyledMovie from './StyledMovie';
+import { Link, useLocation } from 'react-router-dom';
+import { useRef } from 'react';
 
 export function Movie({
   dataMovie: {
@@ -12,12 +14,16 @@ export function Movie({
     release_date,
   },
 }) {
+  const location = useLocation();
+  const goBackLink = useRef(location.state?.from);
+
   const allGenresMovie = genres.map(({ name }) => name).join(', ');
   const voteScore = `${Math.round(vote_average) * 10} %`;
   const releaseYear = `(${release_date.substring(0, 4)})`;
 
   return (
     <>
+      <Link to={goBackLink.current ?? '/'}>Go back</Link>
       <StyledMovie>
         <div className="img-thumb">
           <img
