@@ -32,7 +32,6 @@ function MoviesPage() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(event.target.children.search.value);
     const searchName = event.target.children.search.value;
     setSearchParams({ query: searchName });
   };

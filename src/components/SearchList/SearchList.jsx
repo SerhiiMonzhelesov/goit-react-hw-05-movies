@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 
 function SearchList({ resultSearch, location }) {
-  console.log(location);
   return (
     <ul>
       {resultSearch.map(({ id, title }) => {
