@@ -26,3 +26,9 @@ export const requestReviews = async id => {
   const { data } = await instance.get(`movie/${id}/reviews`);
   return data.results;
 };
+
+export const requestMovieBySearch = async searchValue => {
+  const { data } = await instance.get(`search/movie?query=${searchValue}`);
+  console.log(data.results);
+  return data.results;
+};

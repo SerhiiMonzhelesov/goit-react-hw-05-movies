@@ -3,8 +3,6 @@ import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import { StyledCastList } from './StyledCastList';
 
 export function CastList({ actors }) {
-  // const actorWithPhoto = actors.filter(actor => actor.profile_path && actor);
-
   return (
     <StyledCastList>
       {actors
