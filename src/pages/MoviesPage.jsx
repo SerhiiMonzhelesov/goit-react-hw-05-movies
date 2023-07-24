@@ -8,6 +8,7 @@ import SearchList from 'components/SearchList/SearchList';
 function MoviesPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [resultSearch, setResultSearch] = useState(null);
+  const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const location = useLocation();
@@ -22,7 +23,7 @@ function MoviesPage() {
         const searchData = await requestMovieBySearch(searchValue);
         setResultSearch(searchData);
       } catch (error) {
-        console.log(error);
+        setError(error.message);
       } finally {
         setIsLoading(false);
       }
@@ -51,6 +52,7 @@ function MoviesPage() {
         <button type="submit">Search</button>
       </form>
       {isLoading && <Loader />}
+      {error && <p>Ooops... Error: {error}</p>}
       {resultSearch && (
         <SearchList resultSearch={resultSearch} location={location} />
       )}

@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { requestMovies } from 'services/Api';
 
+import { requestMovies } from 'services/Api';
 import { Loader } from 'components/Loader/Loader';
+import { StyledList } from './StyledHomePage';
 
 function HomePage() {
   const [trendMovies, setTrendMovies] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -15,7 +17,7 @@ function HomePage() {
         const moviesList = await requestMovies();
         setTrendMovies(moviesList);
       } catch (error) {
-        console.log(error);
+        setError(error.message);
       } finally {
         setIsLoading(false);
       }
@@ -27,18 +29,17 @@ function HomePage() {
   return (
     <>
       {isLoading && <Loader />}
-      <div>
-        <h1>Trending today</h1>
-        {trendMovies && (
-          <ul>
-            {trendMovies.map(movie => (
-              <li key={movie.id}>
-                <Link to={`movies/${movie.id}`}>{movie.title}</Link>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      <h1>Trending today</h1>
+      {error && <p>Ooops... Error: {error} </p>}
+      {trendMovies && (
+        <StyledList>
+          {trendMovies.map(movie => (
+            <li key={movie.id}>
+              <Link to={`movies/${movie.id}`}>{movie.title}</Link>
+            </li>
+          ))}
+        </StyledList>
+      )}
     </>
   );
 }

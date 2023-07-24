@@ -8,6 +8,7 @@ import { ReviewList } from 'components/ReviewList/ReviewList';
 function Reviews() {
   const [reviews, setReviews] = useState(null);
   const [isLoading, setIsLoadimg] = useState(false);
+  const [error, setError] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
@@ -17,7 +18,7 @@ function Reviews() {
         const dataReviews = await requestReviews(id);
         setReviews(dataReviews);
       } catch (error) {
-        console.log(error);
+        setError(error.message);
       } finally {
         setIsLoadimg(false);
       }
@@ -28,6 +29,7 @@ function Reviews() {
   return (
     <>
       {isLoading && <Loader />}
+      {error && <p>Ooops... Error: {error}</p>}
       {reviews && reviews.length > 0 ? (
         <ReviewList reviews={reviews} />
       ) : (

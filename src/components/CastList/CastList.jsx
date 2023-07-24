@@ -7,9 +7,9 @@ export function CastList({ actors }) {
     <StyledCastList>
       {actors
         .filter(actor => actor.profile_path && actor)
-        .map(({ id, name, character, profile_path }) => {
+        .map(({ name, character, profile_path, cast_id }) => {
           return (
-            <li key={id}>
+            <li key={cast_id}>
               <div className="thumb">
                 <img
                   data-src={`https://image.tmdb.org/t/p/w500${profile_path}`}

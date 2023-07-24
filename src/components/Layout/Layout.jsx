@@ -1,14 +1,15 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import { NavLinkStyled, StyledHeader } from './StyledHeader';
 
 function Layout() {
   return (
     <>
-      <header className="header">
+      <StyledHeader>
         <nav>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="movies">Movies</NavLink>
+          <NavLinkStyled to="/">Home</NavLinkStyled>
+          <NavLinkStyled to="movies">Movies</NavLinkStyled>
         </nav>
-      </header>
+      </StyledHeader>
       <main>
         <Outlet />
       </main>

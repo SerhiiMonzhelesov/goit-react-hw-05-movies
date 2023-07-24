@@ -5,9 +5,10 @@ import { Movie } from 'components/Movie/Movie';
 import { Loader } from 'components/Loader/Loader';
 import { requestMovie } from 'services/Api';
 
-export function MovieDetails() {
+function MovieDetails() {
   const [dataMovie, setDataMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
@@ -17,7 +18,7 @@ export function MovieDetails() {
         const movie = await requestMovie(id);
         setDataMovie(movie);
       } catch (error) {
-        console.log(error);
+        setError(error.message);
       } finally {
         setIsLoading(false);
       }
@@ -31,6 +32,7 @@ export function MovieDetails() {
       {dataMovie && <Movie dataMovie={dataMovie} />}
       <div>
         <h3>Additional information</h3>
+        {error && <p>Ooops... Error: {error} </p>}
         <ul>
           <li>
             <Link to="cast">Cast</Link>
@@ -44,3 +46,5 @@ export function MovieDetails() {
     </>
   );
 }
+
+export default MovieDetails;

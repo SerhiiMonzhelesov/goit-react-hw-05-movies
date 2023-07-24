@@ -5,7 +5,7 @@ import { requestActors } from 'services/Api';
 import { CastList } from 'components/CastList/CastList';
 import { Loader } from 'components/Loader/Loader';
 
-export function Cast() {
+function Cast() {
   const [actors, setActors] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
@@ -32,3 +32,5 @@ export function Cast() {
     </>
   );
 }
+
+export default Cast;
