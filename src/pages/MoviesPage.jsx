@@ -4,6 +4,7 @@ import { useLocation, useSearchParams } from 'react-router-dom';
 import { Loader } from 'components/Loader/Loader';
 import { requestMovieBySearch } from 'services/Api';
 import SearchList from 'components/SearchList/SearchList';
+import StyledForm from './StyledMoviePage';
 
 function MoviesPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -39,7 +40,7 @@ function MoviesPage() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <StyledForm onSubmit={handleSubmit}>
         <input
           name="search"
           type="text"
@@ -50,7 +51,7 @@ function MoviesPage() {
         ></input>
 
         <button type="submit">Search</button>
-      </form>
+      </StyledForm>
       {isLoading && <Loader />}
       {error && <p>Ooops... Error: {error}</p>}
       {resultSearch && (

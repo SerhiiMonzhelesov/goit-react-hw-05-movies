@@ -21,6 +21,7 @@ export const NavLinkStyled = styled(NavLink)`
     transform: scale(1.1);
     transition: transform 200ms ease-in-out, text-shadow 200ms ease-in-out;
   }
+
   &:hover {
     color: black;
     text-shadow: 0px 0px 7px rgb(13 86 28 / 71%);

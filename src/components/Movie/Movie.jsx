@@ -1,8 +1,10 @@
+import { useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
+import PropTypes from 'prop-types';
 import StyledMovie from './StyledMovie';
-import { Link, useLocation } from 'react-router-dom';
-import { useRef } from 'react';
+import StyledMovieContainer from './StyledMovieContainer';
 
 export function Movie({
   dataMovie: {
@@ -23,26 +25,41 @@ export function Movie({
 
   return (
     <>
-      <Link to={goBackLink.current ?? '/'}>Go back</Link>
-      <StyledMovie>
-        <div className="img-thumb">
-          <img
-            data-src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-            alt={title}
-            className="lazyload blur-up"
-          />
-        </div>
-        <div>
-          <h1>
-            {title} {releaseYear}
-          </h1>
-          <p>User Score: {voteScore}</p>
-          <h2>Overview</h2>
-          <p>{overview}</p>
-          <h3>Genres</h3>
-          <p>{allGenresMovie}</p>
-        </div>
-      </StyledMovie>
+      <StyledMovieContainer>
+        <Link to={goBackLink.current ?? '/'}>Go back</Link>
+        <StyledMovie>
+          <div className="img-thumb">
+            <img
+              data-src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+              alt={title}
+              className="lazyload blur-up"
+            />
+          </div>
+          <div>
+            <h1>
+              {title} {releaseYear}
+            </h1>
+            <p>User Score: {voteScore}</p>
+            <h2>Overview</h2>
+            <p>{overview}</p>
+            <h3>Genres</h3>
+            <p>{allGenresMovie}</p>
+          </div>
+        </StyledMovie>
+      </StyledMovieContainer>
     </>
   );
 }
+
+Movie.propTypes = {
+  dataMovie: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    overview: PropTypes.string.isRequired,
+    poster_path: PropTypes.string.isRequired,
+    vote_average: PropTypes.number.isRequired,
+    genres: PropTypes.arrayOf(
+      PropTypes.shape({ name: PropTypes.string.isRequired }).isRequired
+    ).isRequired,
+    release_date: PropTypes.number.isRequired,
+  }),
+};

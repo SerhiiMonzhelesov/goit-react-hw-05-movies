@@ -1,7 +1,10 @@
+import PropTypes from 'prop-types';
+import StyledReviewsList from './StyledReviewsList';
+
 export function ReviewList({ reviews }) {
   return (
     <>
-      <ul>
+      <StyledReviewsList>
         {reviews.map(({ id, author, content }) => {
           return (
             <li key={id}>
@@ -10,7 +13,17 @@ export function ReviewList({ reviews }) {
             </li>
           );
         })}
-      </ul>
+      </StyledReviewsList>
     </>
   );
 }
+
+ReviewList.propTypes = {
+  reviews: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      author: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};

@@ -1,6 +1,7 @@
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import { StyledCastList } from './StyledCastList';
+import PropTypes from 'prop-types';
 
 export function CastList({ actors }) {
   return (
@@ -17,11 +18,24 @@ export function CastList({ actors }) {
                   className="lazyload blur-up"
                 />
               </div>
-              <h4>{name}</h4>
-              <p>{character}</p>
+              <div className="descrActor">
+                <h4>{name}</h4>
+                <p>{character}</p>
+              </div>
             </li>
           );
         })}
     </StyledCastList>
   );
 }
+
+CastList.propTypes = {
+  actors: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      character: PropTypes.string.isRequired,
+      profile_path: PropTypes.string.isRequired,
+      cast_id: PropTypes.number.isRequired,
+    }).isRequired
+  ).isRequired,
+};

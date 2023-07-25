@@ -17,10 +17,13 @@ const StyledMovie = styled.div`
   .img-thumb {
     width: 100%;
     max-width: 300px;
+    border-radius: 8px;
+    overflow: hidden;
   }
 
   img {
     width: 100%;
+    display: block;
   }
 
   .blur-up {
